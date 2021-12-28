@@ -4,29 +4,31 @@ import * as React from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  FlatList,
   TouchableOpacity,
 } from 'react-native';
+import { useQuery } from '@apollo/client';
 import styled from 'styled-components';
 
 const RoomItem = ({ item }: { item: any }) => {
   const roomID = item.id;
   const navigation = useNavigation();
-  return (
+
+  item && console.log(item.name)
+  
+    return (
     <Wrapper
       onPress={() => {
         navigation.navigate('Chat' as never, { roomID } as never);
       }}
     >
       <View>
-        <Name>{item.name}</Name>
-        <Message>{item.message}</Message>
-        <Time>10m ago</Time>
+        <Name numberOfLines={1}>{item ? item.name : null}</Name>
+        <Message numberOfLines={1}>{'Ron sent a photo. Ron sent a photo.'}</Message>
+        <Time>10 m ago</Time>
       </View>
     </Wrapper>
-  );
-};
+  )}
+;
 
 export default RoomItem;
 
@@ -36,6 +38,7 @@ const Wrapper = styled(TouchableOpacity)`
   padding: 10px;
   borderRadius: 12px;
   marginTop: 10px;
+  border: 1px solid black;
 `;
 
 const Name = styled(Text)`
@@ -53,3 +56,7 @@ const Time = styled(Text)`
   fontSize: 13px;
   lineHeight: 16px;
 `
+
+function GET_ROOM(GET_ROOM: any, arg1: { variables: { roomId: any; }; }): { loading: any; error: any; data: any; } {
+  throw new Error('Function not implemented.');
+}

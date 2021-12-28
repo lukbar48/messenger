@@ -2,31 +2,23 @@ import { View, Text, FlatList } from 'react-native';
 import * as React from 'react';
 import RoomItem from '../components/RoomItem/RoomItem';
 import styled from 'styled-components';
-
-const dummyData = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    name: 'First Item',
-    message: 'siemaeloo'
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    name: 'Second Item',
-    message: 'siemaeloo'
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    name: 'Third Item',
-    message: 'siemaeloo'
-  },
-];
+import { useQuery } from '@apollo/client';
+import { GET_ROOMS } from '../apollo/queries';
 
 const RoomsScreen = () => {
+  const { loading, error, data } = useQuery(GET_ROOMS);
+  console.log('loading', loading);
+  console.log('error', error);
+  console.log('data', data);
+
+  if (loading) return <Text>Loading...</Text>
+  if (error) return <Text>Error!</Text>
+
   return (
     <Wrapper>
       <FlatList
-        data={dummyData}
-        keyExtractor={item => item.id}
+        data={data.usersRooms.rooms}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => <RoomItem item={item} />}
       />
     </Wrapper>
@@ -36,8 +28,7 @@ const RoomsScreen = () => {
 export default RoomsScreen;
 
 const Wrapper = styled(View)`
-  backgroundColor: #F0F8FF;
+  backgroundcolor: #f0f8ff;
   flex: 1;
-  paddingTop: 30px;
-
-`
+  paddingtop: 30px;
+`;
