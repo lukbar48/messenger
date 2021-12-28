@@ -4,6 +4,7 @@ import RoomItem from '../components/RoomItem/RoomItem';
 import styled from 'styled-components/native';
 import { useQuery } from '@apollo/client';
 import { GET_ROOMS } from '../apollo/queries';
+import Colors from '../constants/Colors';
 
 const RoomsScreen = () => {
   const { loading, error, data } = useQuery(GET_ROOMS);
@@ -28,7 +29,7 @@ const RoomsScreen = () => {
 export default RoomsScreen;
 
 const Wrapper = styled(View)`
-  backgroundcolor: #f0f8ff;
+  background-color: ${Colors.background3};
   flex: 1;
   padding-top: 35px;
 `;
