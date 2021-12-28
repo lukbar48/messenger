@@ -24,11 +24,12 @@ const RootNavigator = () => {
           backgroundColor: Colors.background2,
           borderBottomRightRadius: 24,
           borderBottomLeftRadius: 24,
+          height: 80,
         },
         headerTitleStyle: {
           color: Colors.plum3,
           fontSize: 30,
-          fontWeight: 'bold',
+          fontFamily: 'Poppins_700Bold',
         },
       })}
     >

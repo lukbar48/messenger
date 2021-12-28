@@ -1199,6 +1199,16 @@
   "resolved" "https://registry.npmjs.org/@emotion/unitless/-/unitless-0.7.5.tgz"
   "version" "0.7.5"
 
+"@expo-google-fonts/inter@^0.2.0":
+  "integrity" "sha512-gIjkti/NxHABPc4xB/AlgSpbLJod/8Iill7DfW+rh2CHv3jjz7I7SLQY8u/3NoF8zZk0GNU8gTZkVwGQibuWcQ=="
+  "resolved" "https://registry.npmjs.org/@expo-google-fonts/inter/-/inter-0.2.0.tgz"
+  "version" "0.2.0"
+
+"@expo-google-fonts/poppins@^0.2.0":
+  "integrity" "sha512-NIwmzadXGHmS7F7nznfpObVAAi4PdSvueLKnPN3ERG0yMYrC8svEP2IY25H4xLoIGBazgkN192ZkStM3PMYajA=="
+  "resolved" "https://registry.npmjs.org/@expo-google-fonts/poppins/-/poppins-0.2.0.tgz"
+  "version" "0.2.0"
+
 "@expo/config-plugins@^1.0.18":
   "integrity" "sha512-YQJop0c69LKD/6ZJJto7klS7TDmzgs44TI0Z5RBqesOjYlDwNFcQk2Rl2BaA1wlAYkH+rRrhN2+WjjSyD9HiPg=="
   "resolved" "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-1.0.33.tgz"

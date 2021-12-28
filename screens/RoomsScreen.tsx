@@ -1,7 +1,7 @@
 import { View, Text, FlatList } from 'react-native';
 import * as React from 'react';
 import RoomItem from '../components/RoomItem/RoomItem';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import { useQuery } from '@apollo/client';
 import { GET_ROOMS } from '../apollo/queries';
 
@@ -30,5 +30,5 @@ export default RoomsScreen;
 const Wrapper = styled(View)`
   backgroundcolor: #f0f8ff;
   flex: 1;
-  paddingtop: 30px;
+  padding-top: 35px;
 `;
