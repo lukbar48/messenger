@@ -8,9 +8,6 @@ import Colors from '../constants/Colors';
 
 const RoomsScreen = () => {
   const { loading, error, data } = useQuery(GET_ROOMS);
-  console.log('loading', loading);
-  console.log('error', error);
-  console.log('data', data);
 
   if (loading) return <Text>Loading...</Text>
   if (error) return <Text>Error!</Text>
@@ -22,7 +19,7 @@ const RoomsScreen = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <RoomItem item={item} />}
       />
-    </Wrapper>
+    </Wrapper> 
   );
 };
 
@@ -33,3 +30,4 @@ const Wrapper = styled(View)`
   flex: 1;
   padding-top: 35px;
 `;
+

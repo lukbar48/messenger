@@ -5,7 +5,6 @@ import ChatScreen from '../screens/ChatScreen';
 import RoomsScreen from '../screens/RoomsScreen';
 import * as React from 'react';
 import TopBar from '../components/TopBar/TopBar';
-import LeftChevron from '../assets/icons/LeftChevron';
 
 const Navigation = () => {
   return (
@@ -37,7 +36,11 @@ const RootNavigator = () => {
       })}
     >
       <Stack.Screen name="Rooms" component={RoomsScreen} />
-      <Stack.Screen name="Chat" component={ChatScreen} options={{ title: '' }}  />
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{ title: '' }}
+      />
       {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
       {/* <Stack.Screen name="Register" component={RegisterScreen} /> */}
     </Stack.Navigator>

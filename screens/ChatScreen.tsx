@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import Colors from '../constants/Colors';
 import styled from 'styled-components/native';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat } from 'react-native-gifted-chat';
 import SendButton from '../components/Chat/SendButton';
 
 const ChatScreen = () => {
@@ -29,6 +29,34 @@ const ChatScreen = () => {
     );
   }, []);
 
+  const renderBubble = (props) => {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: '#993AFC',
+          },
+          left: {
+            backgroundColor: '#FFFFFF',
+          },
+        }}
+        textStyle={{
+          right: {
+            color: '#FFFFFF',
+            fontFamily: 'Poppins_400Regular',
+            fontSize: '14px'
+          },
+          left: {
+            color: '#1A1A1A',
+            fontFamily: 'Poppins_400Regular',
+            fontSize: '14px'
+          },
+        }}
+      />
+    );
+  };
+
   return (
     <Wrapper>
       <GiftedChat
@@ -44,6 +72,8 @@ const ChatScreen = () => {
           right: { display: 'none' },
         }}
         renderSend={(props) => <SendButton {...props} />}
+        renderBubble={renderBubble}
+        scrollToBottom
       />
     </Wrapper>
   );
