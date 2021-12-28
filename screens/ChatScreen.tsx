@@ -4,9 +4,12 @@ import Colors from '../constants/Colors';
 import styled from 'styled-components/native';
 import { Bubble, GiftedChat } from 'react-native-gifted-chat';
 import SendButton from '../components/Chat/SendButton';
+import { useMutation } from '@apollo/client';
+import { SEND_MESSAGE } from '../apollo/mutations';
 
 const ChatScreen = () => {
   const [messages, setMessages] = useState<any>([]);
+  const [sendMessage, { data, loading, error }] = useMutation(SEND_MESSAGE);
 
   useEffect(() => {
     setMessages([
@@ -27,6 +30,8 @@ const ChatScreen = () => {
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
     );
+    console.log('messages',messages)
+
   }, []);
 
   const renderBubble = (props) => {
@@ -66,7 +71,7 @@ const ChatScreen = () => {
           _id: 1,
         }}
         alwaysShowSend
-        renderAvatar={null as any}
+        renderAvatar={null as never}
         timeTextStyle={{
           left: { display: 'none' },
           right: { display: 'none' },

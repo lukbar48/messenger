@@ -17,7 +17,7 @@ const RoomItem = ({ item }: { item: any }) => {
 
   
     return (
-    <ItemWrapper
+    <Wrapper
       onPress={() => {
         navigation.navigate('Chat' as never, { roomID } as never);
       }}
@@ -26,17 +26,17 @@ const RoomItem = ({ item }: { item: any }) => {
         <Profile />
       </ImageWrapper>
       <TextWrapper>
-        <Name numberOfLines={1}>{item ? item.name : null}</Name>
+        <Name numberOfLines={1}>{item.name}</Name>
         <Message numberOfLines={1}>{'Ron sent a photo. Ron sent a photo.'}</Message>
       </TextWrapper>
         <Time>10 m ago</Time>
-    </ItemWrapper>
+    </Wrapper>
   )}
 ;
 
 export default RoomItem;
 
-const ItemWrapper = styled(TouchableOpacity)`
+const Wrapper = styled(TouchableOpacity)`
   display: flex;
   flex-direction: row;
   width: 100%;
