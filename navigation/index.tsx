@@ -21,7 +21,7 @@ const RootNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName="Room"
-      screenOptions={({ route, navigation }) => ({
+      screenOptions={({ route }) => ({
         headerStyle: {
           backgroundColor: Colors.background2,
           borderBottomRightRadius: 24,
@@ -34,12 +34,10 @@ const RootNavigator = () => {
           fontFamily: 'Poppins_700Bold',
         },
         headerRight: () => <TopBar screenName={route.name} />,
-        // headerLeft: () => <BackButton  onPress={() => navigation.goBack()} />
-        
       })}
     >
       <Stack.Screen name="Rooms" component={RoomsScreen} />
-      <Stack.Screen name="Chat" component={ChatScreen}  />
+      <Stack.Screen name="Chat" component={ChatScreen} options={{ title: '' }}  />
       {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
       {/* <Stack.Screen name="Register" component={RegisterScreen} /> */}
     </Stack.Navigator>
