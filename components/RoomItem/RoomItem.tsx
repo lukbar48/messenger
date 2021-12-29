@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
-import { StackNavigationProp } from '@react-navigation/stack';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   View,
   Text,

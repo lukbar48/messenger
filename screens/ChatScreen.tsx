@@ -1,12 +1,13 @@
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import Colors from '../constants/Colors';
 import styled from 'styled-components/native';
 import { Bubble, GiftedChat, IMessage } from 'react-native-gifted-chat';
 import SendButton from '../components/Chat/SendButton';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { SEND_MESSAGE } from '../apollo/mutations';
 import ChatTopBar from '../components/Chat/ChatTopBar';
+import { GET_ROOM_ITEM } from '../apollo/queries';
 
 export interface IChatScreen {
   route: any;
@@ -16,6 +17,17 @@ const ChatScreen = ({ route }: IChatScreen) => {
   const [sendMessage] = useMutation(SEND_MESSAGE);
   const [messages, setMessages] = useState<IMessage[]>([]);
   const { room } = route.params;
+
+  const { loading, error, data } = useQuery(GET_ROOM_ITEM, {
+    variables: {
+      roomId: room.id,
+    },
+    pollInterval: 1000,
+  });
+
+  if (loading) return <Text>Loading...</Text>
+  if (error) return <Text>Error!</Text>
+  if (!data) return null
 
   useEffect(() => {
     setMessages(
@@ -32,8 +44,6 @@ const ChatScreen = ({ route }: IChatScreen) => {
       })
     );
   }, []);
-
-  console.log(room.messages);
 
   const onSend = useCallback(
     (messages = []) => {
