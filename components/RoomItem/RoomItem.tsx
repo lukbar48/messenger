@@ -14,7 +14,6 @@ import { GET_ROOM_ITEM } from '../../apollo/queries';
 
 const RoomItem = ({ item }: { item: any }) => {
   const roomId = item.id;
-  const roomName = item.name;
   const navigation = useNavigation();
   
   const { loading, error, data } = useQuery(GET_ROOM_ITEM, {
@@ -27,11 +26,9 @@ const RoomItem = ({ item }: { item: any }) => {
   if (error) return <Text>Error!</Text>
   if (!data) return null
 
-    const {room} = data
-    console.log(room)
-  
+  const { room } = data  
 
-    return (
+  return (
     <Wrapper
       onPress={() => {
         navigation.navigate('Chat' as never, { room } as never);

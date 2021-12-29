@@ -8,26 +8,36 @@ import Colors from '../constants/Colors';
 
 const RoomsScreen = () => {
   const { loading, error, data } = useQuery(GET_ROOMS);
-  if (loading) return <Text>Loading...</Text>
-  if (error) return <Text>Error!</Text>
-  if (!data) return null
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error!</Text>;
+  if (!data) return null;
 
   return (
-    <Wrapper>
-      <FlatList
-        data={data.usersRooms.rooms}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <RoomItem item={item} />}
-      />
-    </Wrapper> 
+    <Background>
+      <Wrapper>
+        <FlatList
+          data={data.usersRooms.rooms}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <RoomItem item={item} />}
+        />
+      </Wrapper>
+    </Background>
   );
 };
 
 export default RoomsScreen;
 
 const Wrapper = styled(View)`
-  background-color: ${Colors.background3};
+  background-color: transparent;
   flex: 1;
   padding-top: 35px;
 `;
 
+const Background = styled(View)`
+  background-color: ${Colors.background3};
+  position: absolute;
+  top: -24px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;

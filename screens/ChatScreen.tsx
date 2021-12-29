@@ -17,7 +17,7 @@ const ChatScreen = ({ route }:IChatScreen) => {
   const [messages, setMessages] = useState<IMessage[]>([]);
   const { room } = route.params
   const { id, messages: msgs, name, user } = room
-  // console.log(id, msgs, user, name)
+  console.log('id msg, user, name:',id, msgs, user, name)
   useEffect(() => {
     setMessages([
       {
@@ -38,7 +38,6 @@ const ChatScreen = ({ route }:IChatScreen) => {
       GiftedChat.append(previousMessages, messages)
     );
     const body = messages[0].text;
-    console.log(id)
       sendMessage({
         variables: { body, id },
       });
