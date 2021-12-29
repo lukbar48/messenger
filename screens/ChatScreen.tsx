@@ -9,15 +9,15 @@ import { SEND_MESSAGE } from '../apollo/mutations';
 import ChatTopBar from '../components/Chat/ChatTopBar';
 
 interface IChatScreen {
-  roomId: number;
-  roomName: string;
+  route: any;
 }
 
-const ChatScreen = ({ roomId, roomName }:IChatScreen) => {
+const ChatScreen = ({ route }:IChatScreen) => {
   const [sendMessage, { data, loading, error }] = useMutation(SEND_MESSAGE);
-
   const [messages, setMessages] = useState<IMessage[]>([]);
-
+  const { room } = route.params
+  const { id, messages: msgs, name, user } = room
+  // console.log(id, msgs, user, name)
   useEffect(() => {
     setMessages([
       {
@@ -38,11 +38,12 @@ const ChatScreen = ({ roomId, roomName }:IChatScreen) => {
       GiftedChat.append(previousMessages, messages)
     );
     const body = messages[0].text;
-    console.log(roomId)
+    console.log(id)
       sendMessage({
-        variables: { body, roomId },
+        variables: { body, id },
       });
-  }, [sendMessage, roomId]);
+  }, [sendMessage, id]);
+  // }, []);
 
   const renderBubble = (props) => {
     return (
@@ -74,7 +75,7 @@ const ChatScreen = ({ roomId, roomName }:IChatScreen) => {
 
   return (
     <Wrapper>
-      <ChatTopBar name={roomName} />
+      <ChatTopBar name={name} />
       <GiftedChat
         messages={messages}
         onSend={(messages) => onSend(messages)}

@@ -24,8 +24,8 @@ export const GET_ROOMS = gql`
 `;
 
 export const GET_ROOM_ITEM = gql`
-  query room($id: ID!) {
-    room(id: $id) {
+  query room($roomId: String!) {
+    room(id: $roomId) {
       id
       messages {
         id
@@ -33,10 +33,6 @@ export const GET_ROOM_ITEM = gql`
         insertedAt
         user {
           id
-          firstName
-          email
-          lastName
-          role
         }
       }
       name

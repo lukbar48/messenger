@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import { StackNavigationProp } from '@react-navigation/stack';
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,16 +10,31 @@ import { useQuery } from '@apollo/client';
 import styled from 'styled-components/native';
 import Colors from '../../constants/Colors';
 import ProfileIcon from '../../assets/icons/ProfileIcon';
+import { GET_ROOM_ITEM } from '../../apollo/queries';
 
 const RoomItem = ({ item }: { item: any }) => {
   const roomId = item.id;
   const roomName = item.name;
   const navigation = useNavigation();
+  
+  const { loading, error, data } = useQuery(GET_ROOM_ITEM, {
+    variables: {
+      roomId,
+    },
+  });
+
+  if (loading) return <Text>Loading...</Text>
+  if (error) return <Text>Error!</Text>
+  if (!data) return null
+
+    const {room} = data
+    console.log(room)
+  
 
     return (
     <Wrapper
       onPress={() => {
-        navigation.navigate('Chat' as never, { roomId, roomName } as never);
+        navigation.navigate('Chat' as never, { room } as never);
       }}
     >
       <ImageWrapper>

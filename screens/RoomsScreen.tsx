@@ -8,9 +8,6 @@ import Colors from '../constants/Colors';
 
 const RoomsScreen = () => {
   const { loading, error, data } = useQuery(GET_ROOMS);
-
-  data && console.log(data)
-
   if (loading) return <Text>Loading...</Text>
   if (error) return <Text>Error!</Text>
   if (!data) return null
