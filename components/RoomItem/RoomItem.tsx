@@ -12,14 +12,14 @@ import Colors from '../../constants/Colors';
 import ProfileIcon from '../../assets/icons/ProfileIcon';
 
 const RoomItem = ({ item }: { item: any }) => {
-  const roomID = item.id;
+  const roomId = item.id;
+  const roomName = item.name;
   const navigation = useNavigation();
 
-  
     return (
     <Wrapper
       onPress={() => {
-        navigation.navigate('Chat' as never, { roomID } as never);
+        navigation.navigate('Chat' as never, { roomId, roomName } as never);
       }}
     >
       <ImageWrapper>
@@ -82,6 +82,7 @@ const TextWrapper = styled(View)`
 
   const ImageWrapper = styled(View)`
     marginRight: 20px;
+    overflow: hidden;
   `
   
   const Profile = styled(ProfileIcon)`

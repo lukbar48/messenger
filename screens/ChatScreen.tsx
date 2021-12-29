@@ -2,14 +2,21 @@ import { View } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import Colors from '../constants/Colors';
 import styled from 'styled-components/native';
-import { Bubble, GiftedChat } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat, IMessage } from 'react-native-gifted-chat';
 import SendButton from '../components/Chat/SendButton';
 import { useMutation } from '@apollo/client';
 import { SEND_MESSAGE } from '../apollo/mutations';
+import ChatTopBar from '../components/Chat/ChatTopBar';
 
-const ChatScreen = () => {
-  const [messages, setMessages] = useState<any>([]);
+interface IChatScreen {
+  roomId: number;
+  roomName: string;
+}
+
+const ChatScreen = ({ roomId, roomName }:IChatScreen) => {
   const [sendMessage, { data, loading, error }] = useMutation(SEND_MESSAGE);
+
+  const [messages, setMessages] = useState<IMessage[]>([]);
 
   useEffect(() => {
     setMessages([
@@ -30,9 +37,12 @@ const ChatScreen = () => {
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
     );
-    console.log('messages',messages)
-
-  }, []);
+    const body = messages[0].text;
+    console.log(roomId)
+      sendMessage({
+        variables: { body, roomId },
+      });
+  }, [sendMessage, roomId]);
 
   const renderBubble = (props) => {
     return (
@@ -64,6 +74,7 @@ const ChatScreen = () => {
 
   return (
     <Wrapper>
+      <ChatTopBar name={roomName} />
       <GiftedChat
         messages={messages}
         onSend={(messages) => onSend(messages)}
@@ -71,7 +82,7 @@ const ChatScreen = () => {
           _id: 1,
         }}
         alwaysShowSend
-        renderAvatar={null as never}
+        // renderAvatar={null as never}
         timeTextStyle={{
           left: { display: 'none' },
           right: { display: 'none' },

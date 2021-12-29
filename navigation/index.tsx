@@ -19,7 +19,7 @@ const Stack = createNativeStackNavigator();
 const RootNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Rooms"
+      initialRouteName="Chat"
       screenOptions={({ route }) => ({
         headerStyle: {
           backgroundColor: Colors.background2,
@@ -39,7 +39,7 @@ const RootNavigator = () => {
       <Stack.Screen
         name="Chat"
         component={ChatScreen}
-        options={{ title: '' }}
+        options={{ headerShown: false }}
       />
       {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
       {/* <Stack.Screen name="Register" component={RegisterScreen} /> */}
