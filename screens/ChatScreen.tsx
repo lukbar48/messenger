@@ -64,7 +64,8 @@ const ChatScreen = ({ route }: IChatScreen) => {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: '#993AFC',
+            backgroundColor: '#993AFC', 
+            borderBottomRightRadius: 0,
           },
           left: {
             backgroundColor: '#FFFFFF',
