@@ -39,7 +39,7 @@ const RoomItem = ({ item }: { item: any }) => {
       </ImageWrapper>
       <TextWrapper>
         <Name numberOfLines={1}>{item.name}</Name>
-        <Message numberOfLines={1}>{'Ron sent a photo. Ron sent a photo.'}</Message>
+        <Message numberOfLines={1}>{room.messages[0].body}</Message>
       </TextWrapper>
         <Time>10 m ago</Time>
     </Wrapper>
@@ -93,7 +93,7 @@ const TextWrapper = styled(View)`
 `
 
   const ImageWrapper = styled(View)`
-    marginRight: 20px;
+    margin-right: 20px;
     overflow: hidden;
   `
   

@@ -8,41 +8,46 @@ import { useMutation } from '@apollo/client';
 import { SEND_MESSAGE } from '../apollo/mutations';
 import ChatTopBar from '../components/Chat/ChatTopBar';
 
-interface IChatScreen {
+export interface IChatScreen {
   route: any;
 }
 
-const ChatScreen = ({ route }:IChatScreen) => {
-  const [sendMessage, { data, loading, error }] = useMutation(SEND_MESSAGE);
+const ChatScreen = ({ route }: IChatScreen) => {
+  const [sendMessage] = useMutation(SEND_MESSAGE);
   const [messages, setMessages] = useState<IMessage[]>([]);
-  const { room } = route.params
-  const { id, messages: msgs, name, user } = room
-  console.log('id msg, user, name:',id, msgs, user, name)
+  const { room } = route.params;
+
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      },
-    ]);
+    setMessages(
+      room.messages.map((message) => {
+        const { id, body, insertedAt, user } = message;
+        return {
+          _id: id,
+          text: body,
+          createdAt: insertedAt,
+          user: {
+            _id: user.id,
+          },
+        };
+      })
+    );
   }, []);
 
-  const onSend = useCallback((messages = []) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, messages)
-    );
-    const body = messages[0].text;
+  console.log(room.messages);
+
+  const onSend = useCallback(
+    (messages = []) => {
+      setMessages((previousMessages) =>
+        GiftedChat.append(previousMessages, messages)
+      );
+      const body = messages[0].text;
+      const roomId = room.id;
       sendMessage({
-        variables: { body, id },
+        variables: { body, roomId },
       });
-  }, [sendMessage, id]);
-  // }, []);
+    },
+    [sendMessage, room.id]
+  );
 
   const renderBubble = (props) => {
     return (
@@ -60,12 +65,12 @@ const ChatScreen = ({ route }:IChatScreen) => {
           right: {
             color: '#FFFFFF',
             fontFamily: 'Poppins_400Regular',
-            fontSize: '14px'
+            fontSize: '14px',
           },
           left: {
             color: '#1A1A1A',
             fontFamily: 'Poppins_400Regular',
-            fontSize: '14px'
+            fontSize: '14px',
           },
         }}
       />
@@ -74,7 +79,7 @@ const ChatScreen = ({ route }:IChatScreen) => {
 
   return (
     <Wrapper>
-      <ChatTopBar name={name} />
+      <ChatTopBar name={room.name} />
       <GiftedChat
         messages={messages}
         onSend={(messages) => onSend(messages)}
@@ -82,7 +87,6 @@ const ChatScreen = ({ route }:IChatScreen) => {
           _id: 1,
         }}
         alwaysShowSend
-        // renderAvatar={null as never}
         timeTextStyle={{
           left: { display: 'none' },
           right: { display: 'none' },

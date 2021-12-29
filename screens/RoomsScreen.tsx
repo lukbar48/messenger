@@ -30,7 +30,7 @@ export default RoomsScreen;
 const Wrapper = styled(View)`
   background-color: transparent;
   flex: 1;
-  padding-top: 35px;
+  padding-top: 55px;
 `;
 
 const Background = styled(View)`
