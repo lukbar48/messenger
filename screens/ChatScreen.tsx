@@ -1,13 +1,12 @@
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
-import Colors from '../constants/Colors';
-import styled from 'styled-components/native';
 import { Bubble, GiftedChat, IMessage } from 'react-native-gifted-chat';
 import SendButton from '../components/Chat/SendButton';
 import { useMutation, useQuery } from '@apollo/client';
 import { SEND_MESSAGE } from '../apollo/mutations';
 import ChatTopBar from '../components/Chat/ChatTopBar';
 import { GET_ROOM_ITEM } from '../apollo/queries';
+import { Wrapper } from './ChatScreen.style';
 
 export interface IChatScreen {
   route: any;
@@ -25,9 +24,9 @@ const ChatScreen = ({ route }: IChatScreen) => {
     pollInterval: 1000,
   });
 
-  if (loading) return <Text>Loading...</Text>
-  if (error) return <Text>Error!</Text>
-  if (!data) return null
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error!</Text>;
+  if (!data) return null;
 
   useEffect(() => {
     setMessages(
@@ -110,8 +109,3 @@ const ChatScreen = ({ route }: IChatScreen) => {
 };
 
 export default ChatScreen;
-
-const Wrapper = styled(View)`
-  background-color: ${Colors.background3};
-  flex: 1;
-`;
