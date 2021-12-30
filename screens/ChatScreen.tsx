@@ -7,16 +7,12 @@ import { SEND_MESSAGE } from '../apollo/mutations';
 import ChatTopBar from '../components/Chat/ChatTopBar';
 import { GET_ROOM_ITEM } from '../apollo/queries';
 import { Wrapper } from './ChatScreen.style';
+import { IRoomMessage } from '../types';
 
-export interface IChatScreen {
-  route: any;
-}
-
-const ChatScreen = ({ route }: IChatScreen) => {
+const ChatScreen = ({ route }) => {
   const [sendMessage] = useMutation(SEND_MESSAGE);
   const [messages, setMessages] = useState<IMessage[]>([]);
   const { room } = route.params;
-
   const { loading, error, data } = useQuery(GET_ROOM_ITEM, {
     variables: {
       roomId: room.id,
@@ -30,7 +26,7 @@ const ChatScreen = ({ route }: IChatScreen) => {
 
   useEffect(() => {
     setMessages(
-      room.messages.map((message) => {
+      room.messages.map((message: IRoomMessage) => {
         const { id, body, insertedAt, user } = message;
         return {
           _id: id,
@@ -64,11 +60,12 @@ const ChatScreen = ({ route }: IChatScreen) => {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: '#993AFC', 
+            backgroundColor: '#993AFC',
             borderBottomRightRadius: 0,
           },
           left: {
             backgroundColor: '#FFFFFF',
+            borderBottomLeftRadius: 0,
           },
         }}
         textStyle={{

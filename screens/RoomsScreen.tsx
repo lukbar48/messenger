@@ -4,9 +4,11 @@ import RoomItem from '../components/RoomItem/RoomItem';
 import { useQuery } from '@apollo/client';
 import { GET_ROOMS } from '../apollo/queries';
 import { Background, Wrapper } from './RoomsScreen.style';
+import { IRoom } from '../types';
 
 const RoomsScreen = () => {
   const { loading, error, data } = useQuery(GET_ROOMS);
+
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error!</Text>;
   if (!data) return null;
@@ -17,7 +19,7 @@ const RoomsScreen = () => {
         <FlatList
           data={data.usersRooms.rooms}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <RoomItem item={item} />}
+          renderItem={({ item }: { item: IRoom }) => <RoomItem item={item} />}
         />
       </Wrapper>
     </Background>

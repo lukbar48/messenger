@@ -12,11 +12,11 @@ import {
   Time,
   Wrapper,
 } from './RoomItem.style';
+import { ChatScreenProp, IRoom } from '../../types';
 
-const RoomItem = ({ item }: { item: any }) => {
+const RoomItem = ({ item }: { item: IRoom }) => {
   const roomId = item.id;
-  const navigation = useNavigation();
-
+  const navigation = useNavigation<ChatScreenProp>();
   const { loading, error, data } = useQuery(GET_ROOM_ITEM, {
     variables: {
       roomId,
@@ -28,11 +28,11 @@ const RoomItem = ({ item }: { item: any }) => {
   if (!data) return null;
 
   const { room } = data;
-
+  
   return (
     <Wrapper
       onPress={() => {
-        navigation.navigate('Chat' as never, { room } as never);
+        navigation.navigate('Chat', { room } as never);
       }}
     >
       <ImageWrapper>

@@ -20,7 +20,7 @@ const RootNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName="Rooms"
-      screenOptions={({ route }) => ({
+      screenOptions={() => ({
         headerStyle: {
           backgroundColor: Colors.background2,
           borderBottomRightRadius: 24,
@@ -32,7 +32,7 @@ const RootNavigator = () => {
           fontSize: 30,
           fontFamily: 'Poppins_700Bold',
         },
-        headerRight: () => <TopBar screenName={route.name} />,
+        headerRight: () => <TopBar />,
       })}
     >
       <Stack.Screen name="Rooms" component={RoomsScreen} />
